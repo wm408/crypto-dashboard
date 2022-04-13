@@ -44,6 +44,9 @@ svg:hover {
 .margin-top { 
   margin-top: 25px;
 }
+.margin-btm {
+  margin-bottom: 20px;
+}
 button {
   background-color: #fff;
   border: 0px;
@@ -59,4 +62,24 @@ button {
   text-decoration: none;
   color: black;
   font-weight: 600;
+}
+.logreg {
+  width: 400px;
+  margin: 0 auto;
+  min-height: 100%;
+  min-height: 100vh;
+  height: auto;
+  margin-top: 55px;
+  /* align-items: center;
+  display: flex; */
+}
+
+/* .form-control:focus{
+  box-shadow: 0 0 0 0.25rem rgba(255, 3, 3, 0.316) !important;
+  border-color: #ea1025 !important;
+} */
+
+.error-text {
+  color: #ea1025;
+  /* font-weight: 600; */
 }

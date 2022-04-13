@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { BsSuitHeart, BsSuitHeartFill } from 'react-icons/bs';
-import Picked from './Picked';
-// import Table from 'react-bootstrap/Table';
+import PickFavorite from '../components/PickFavorite';
 import { Table } from "react-bootstrap";
 
 const Top15 = (props) => {
-    // what do we want to destructure from Home.js? What are we sending down?
-    const { listTop15 } = props;
+    const { listTop15, favorites, setFavorites } = props;
     
     return(
         <div className="margin-top">
@@ -21,7 +19,7 @@ const Top15 = (props) => {
                             <th>24h Change %</th>
                             <th>Market Cap</th>
                             <th>Circulating Supply</th>
-                            <th>Picked</th>
+                            <th>Favorites</th>
                             <th>Detail</th>
                         </tr>
                     </thead>
@@ -38,7 +36,13 @@ const Top15 = (props) => {
                                     <td>{ crypto.quote.USD.percent_change_24h.toLocaleString() }%</td>
                                     <td>${ crypto.quote.USD.market_cap.toLocaleString() }</td>
                                     <td>{ crypto.circulating_supply.toLocaleString() }</td>
-                                    <td><Picked /></td>
+                                    <td>
+                                        <PickFavorite
+                                            symbol={crypto.symbol}
+                                            favorites={favorites}
+                                            setFavorites={setFavorites}
+                                        />
+                                    </td>
                                     <td>DetailBtn</td>
                                 </tr>
                             )})
