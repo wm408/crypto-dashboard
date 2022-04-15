@@ -11,6 +11,7 @@ module.exports = (app)=>{
     app.get('/api/favoritesbyuser/:emailAddress', authenticate, favoriteController.findAllFavoritesByUser); //pass in the email address as the request params.
     //The parameter id, as defined in the controller MUST MATCH
     //what we defined it as in the controller!
-    app.delete('/api/favorites/:id', favoriteController.deleteOneFavorite);
+    // app.delete('/api/favorites/:id', favoriteController.deleteOneFavorite);
+    app.delete('/api/favorites/:symbol', favoriteController.deleteOneFavorite);
     app.put('/api/favorites/:id', favoriteController.updateFavorite);
 }

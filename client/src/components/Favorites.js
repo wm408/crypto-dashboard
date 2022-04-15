@@ -1,11 +1,13 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { Table } from "react-bootstrap";
 import { BsSuitHeart, BsSuitHeartFill } from 'react-icons/bs';
-import PickFavorite from './PickFavorite';
+import DeleteFavorite from './DeleteFavorite';
+import DeleteButton from './DeleteButton';
 
 const Favorites = (props) => {
 
-    const { favorites, setFavorites, listTop15, userEmail } = props; //ADD SYMBOLS ARRAY from HOME to props here.
+    const { favorites, setFavorites, listTop15, removeFromDom } = props; //ADD SYMBOLS ARRAY from HOME to props here.
+    // const [ loaded, setLoaded ] = useState(false);
 
     return(
         <div className="margin-top">
@@ -24,29 +26,30 @@ const Favorites = (props) => {
                         </tr>
                     </thead>
                     <tbody id="middle">
-                        {/* {
-                        favorites.map((crypto, index)=>{
+                        {
+                        favorites.map((crypto, index)=>{ // ? if favorites, go ahead and map through
                             return (
-                                <tr key={index}>
-                                    <td>{index + 1}</td>
+                                <tr key={crypto.symbol}>
+                                    <td>1</td>
                                     <td>
-                                        <a className="crypto-links" href="#"><img className="token-icon" src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${crypto.id}.png`} />{ crypto.name }</a>
+                                        <a className="crypto-links"><img className="token-icon" src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${crypto.id}.png`} />{ crypto.name }</a>
                                     </td>
                                     <td>${ crypto.quote.USD.price.toLocaleString() }</td>
                                     <td>{ crypto.quote.USD.percent_change_24h.toLocaleString() }%</td>
                                     <td>${ crypto.quote.USD.market_cap.toLocaleString() }</td>
                                     <td>{ crypto.circulating_supply.toLocaleString() }</td>
                                     <td>
-                                        <PickFavorite
+                                        {/* <DeleteFavorite
                                             symbol={crypto.symbol}
                                             favorites={favorites}
                                             setFavorites={setFavorites}
-                                        />
+                                        /> */}
+                                        <DeleteButton deleteCallBack={()=>removeFromDom(crypto.symbol)}/>
                                     </td>
                                     <td>DetailBtn</td>
                                 </tr>
                             )})
-                        } */}
+                        }
                     </tbody>
                 </Table>
         </div>

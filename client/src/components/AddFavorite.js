@@ -2,22 +2,27 @@ import React, { useState } from 'react';
 import { BsSuitHeart, BsSuitHeartFill } from 'react-icons/bs';
 import axios from 'axios';
 
-const PickFavorite = (props) => {
+const AddFavorite = (props) => {
 
     const { favorites, setFavorites, symbol  } = props;
     const [ errors, setErrors ] = useState('');
+    const [ loaded, setLoaded ] = useState(false);
     const addToFavorites = async (e) => {
         e.preventDefault()
         try {
             const newFavorite = await axios.get(`http://localhost:8000/api/list/getone?symbol=${e.currentTarget.id}`, { withCredentials: true })
-            setFavorites([...favorites, newFavorite.data.data.symbol]); // how to go into the e.currentTarget.id?
-            // console.log(newFavorite.data.data);
             const postFavs = await axios.post('http://localhost:8000/api/favorites', 
             {
                 favorite:true,
                 symbol:symbol,
                 notes:'Leave your notes here',
             }, { withCredentials: true });
+
+            setFavorites([newFavorite.data.data.symbol, ...favorites]); // how to go into the e.currentTarget.id?
+            // console.log(e.currentTarget.id);
+            // console.log(newFavorite.data.data.symbol);
+            // console.log(newFavorite.data.`${e.currentTarget.id}`)
+
         } catch (err) {
             // console.log(err);
             // console.log("err.response:", err.response);
@@ -50,4 +55,4 @@ const PickFavorite = (props) => {
     )
 }
 
-export default PickFavorite;
+export default AddFavorite;

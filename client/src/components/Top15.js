@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { BsSuitHeart, BsSuitHeartFill } from 'react-icons/bs';
-import PickFavorite from '../components/PickFavorite';
+import AddFavorite from './AddFavorite';
 import { Table } from "react-bootstrap";
 
 const Top15 = (props) => {
-    const { listTop15, favorites, setFavorites } = props;
+    const { listTop15, favorites, setFavorites, setLoaded } = props;
     
     return(
         <div className="margin-top">
@@ -27,7 +27,7 @@ const Top15 = (props) => {
                         {
                         listTop15.map((crypto, index)=>{
                             return (
-                                <tr key={index}>
+                                <tr key={crypto.id}>
                                     <td>{index + 1}</td>
                                     <td>
                                         <a className="crypto-links" href="#"><img className="token-icon" src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${crypto.id}.png`} />{ crypto.name }</a>
@@ -37,7 +37,7 @@ const Top15 = (props) => {
                                     <td>${ crypto.quote.USD.market_cap.toLocaleString() }</td>
                                     <td>{ crypto.circulating_supply.toLocaleString() }</td>
                                     <td>
-                                        <PickFavorite
+                                        <AddFavorite
                                             symbol={crypto.symbol}
                                             favorites={favorites}
                                             setFavorites={setFavorites}

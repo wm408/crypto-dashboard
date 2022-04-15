@@ -61,7 +61,8 @@ const findOneFavorite = (req, res) => {
 }
 
 const deleteOneFavorite = (req, res) => {
-    Favorites.deleteOne({_id: req.params.id})
+    // Favorites.deleteOne({_id: req.params.id})
+    Favorites.deleteOne({symbol: req.params.symbol})
     .then((deletedFavorite)=>{
         console.log(deletedFavorite);
         res.json(deletedFavorite);
