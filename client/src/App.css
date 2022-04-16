@@ -83,3 +83,18 @@ button {
   color: #ea1025;
   /* font-weight: 600; */
 }
+
+.top-crypto-list {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  padding-top: 15px;
+}
+
+.search-box{ 
+  width: 250px;
+}
+
+.add-fav-icon > input {
+  display: none;
+}

@@ -5,11 +5,15 @@ import AddFavorite from './AddFavorite';
 import { Table } from "react-bootstrap";
 
 const Top15 = (props) => {
-    const { listTop15, favorites, setFavorites, setLoaded } = props;
     
+    const { listTop15, favorites, setFavorites, searchCrypto, setSearchCrypto } = props;
+
     return(
         <div className="margin-top">
-            <h2 id="top15-heading">Top 15 By Market Cap</h2>
+            <div className="top-crypto-list">
+                <h2 id="top15-heading">Top 15 By Market Cap</h2>
+                <input type="text" className="search-box" placeholder='Search crypto name or ticker' onChange={(e)=>{setSearchCrypto(e.target.value)}}/>
+            </div>
                 <Table bordered>
                     <thead>
                         <tr>
@@ -25,7 +29,15 @@ const Top15 = (props) => {
                     </thead>
                     <tbody id="middle">
                         {
-                        listTop15.map((crypto, index)=>{
+                            listTop15.filter((val)=>{
+                                if(searchCrypto === ''){
+                                    return val
+                                } else if (val.name.toLowerCase().includes(searchCrypto.toLowerCase()) || val.symbol.toLowerCase().includes(searchCrypto.toLowerCase())
+                                ){
+                                    return val
+                                }
+                            })
+                        .map((crypto, index)=>{
                             return (
                                 <tr key={crypto.id}>
                                     <td>{index + 1}</td>

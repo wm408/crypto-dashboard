@@ -6,8 +6,7 @@ import DeleteButton from './DeleteButton';
 
 const Favorites = (props) => {
 
-    const { favorites, setFavorites, listTop15, removeFromDom } = props; //ADD SYMBOLS ARRAY from HOME to props here.
-    // const [ loaded, setLoaded ] = useState(false);
+    const { favorites, removeFromDom } = props;
 
     return(
         <div className="margin-top">
@@ -38,14 +37,7 @@ const Favorites = (props) => {
                                     <td>{ crypto.quote.USD.percent_change_24h.toLocaleString() }%</td>
                                     <td>${ crypto.quote.USD.market_cap.toLocaleString() }</td>
                                     <td>{ crypto.circulating_supply.toLocaleString() }</td>
-                                    <td>
-                                        {/* <DeleteFavorite
-                                            symbol={crypto.symbol}
-                                            favorites={favorites}
-                                            setFavorites={setFavorites}
-                                        /> */}
-                                        <DeleteButton deleteCallBack={()=>removeFromDom(crypto.symbol)}/>
-                                    </td>
+                                    <td><DeleteButton deleteCallBack={()=>removeFromDom(crypto.symbol)}/></td>
                                     <td>DetailBtn</td>
                                 </tr>
                             )})

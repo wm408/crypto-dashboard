@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { BsSuitHeart, BsSuitHeartFill } from 'react-icons/bs';
 import axios from 'axios';
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
 
 const AddFavorite = (props) => {
 
@@ -11,14 +13,19 @@ const AddFavorite = (props) => {
         e.preventDefault()
         try {
             const newFavorite = await axios.get(`http://localhost:8000/api/list/getone?symbol=${e.currentTarget.id}`, { withCredentials: true })
+            console.log(newFavorite.data.data)
+            console.log(newFavorite.data.data[e.target.id])
             const postFavs = await axios.post('http://localhost:8000/api/favorites', 
-            {
-                favorite:true,
-                symbol:symbol,
-                notes:'Leave your notes here',
-            }, { withCredentials: true });
+                {
+                    favorite:true,
+                    symbol: e.target.id,
+                    notes:'Leave your notes here',
+                }, { withCredentials: true });
 
-            setFavorites([newFavorite.data.data.symbol, ...favorites]); // how to go into the e.currentTarget.id?
+            console.log(newFavorite.data.data)
+            console.log(newFavorite.data.data[e.target.id][0])
+
+            setFavorites([...favorites, newFavorite.data.data[e.target.id][0]]);
             // console.log(e.currentTarget.id);
             // console.log(newFavorite.data.data.symbol);
             // console.log(newFavorite.data.`${e.currentTarget.id}`)
@@ -32,9 +39,6 @@ const AddFavorite = (props) => {
         }
     }
 
-    const alreadyExists = () => {
-        alert('already exists');
-    }
     /* 
     Function to take the id (cmc id or symbol) value from the button, then,
     copy the particular cmc crypto from the Top15 state to the Favorites
@@ -42,15 +46,14 @@ const AddFavorite = (props) => {
     the favorite crypto.
     */
     return(
-        <div>
-            <button id={`${symbol}`} onClick={addToFavorites}>
-                <BsSuitHeartFill />
-                {
-                    errors.addToFavorites?
-                    <span className="error-msg">{alreadyExists}</span>
-                    :null
-                }
-            </button>
+        <div className="add-fav-icon">
+            {/* Look up invisible inputs. Throw the input on top of the heart */}
+            <Tippy content={'Add favorite'}>
+                <label htmlFor={`${symbol}`}>
+                    <BsSuitHeartFill />
+                </label>
+            </Tippy>
+                <input type="submit" id={`${symbol}`} onClick={(e) => addToFavorites(e)}/>
         </div>
     )
 }

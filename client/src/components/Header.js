@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -29,7 +29,7 @@ const Header = (props) => {
                 <h1 className="margin-top">Crypto Dashboard</h1>
             </div>
             <div className="">
-            <button className="btn btn-sm btn-outline-secondary" onClick={(e) => logout(e)}> Logout</button>
+                <button className="btn btn-sm btn-outline-secondary" onClick={(e) => logout(e)}> Logout</button>
             </div>
         </div>
         

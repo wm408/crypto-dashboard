@@ -12,6 +12,7 @@ const Home = () => {
     const [ userEmail, setUserEmail ] = useState({});
     const [ loaded, setLoaded ] = useState(false);
     const [ userFavs, setUserFavs ] = useState([]);
+    const [ searchCrypto, setSearchCrypto ] = useState('')
     const [ num, setNum ] = useState(0);
 
     useEffect(()=>{
@@ -51,19 +52,21 @@ const Home = () => {
 
     return(
         <div>
-            <Header />
+            <Header 
+                setSearchCrypto={setSearchCrypto}
+            />
             <Favorites 
                 listTop15={listTop15}
                 favorites={favorites}
                 setFavorites={setFavorites}
                 removeFromDom={removeFromDom}
-                // userEmail={userEmail}
             />
             <Top15 
                 listTop15={listTop15}
                 favorites={favorites}
                 setFavorites={setFavorites}
-                // setLoaded={setLoaded}
+                searchCrypto={searchCrypto}
+                setSearchCrypto={setSearchCrypto}
             />
         </div>
     )
