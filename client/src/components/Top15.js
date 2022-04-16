@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { BsSuitHeart, BsSuitHeartFill } from 'react-icons/bs';
+import React from 'react';
 import AddFavorite from './AddFavorite';
 import { Table } from "react-bootstrap";
 
@@ -12,7 +10,7 @@ const Top15 = (props) => {
         <div className="margin-top">
             <div className="top-crypto-list">
                 <h2 id="top15-heading">Top 15 By Market Cap</h2>
-                <input type="text" className="search-box" placeholder='Search crypto name or ticker' onChange={(e)=>{setSearchCrypto(e.target.value)}}/>
+                <input type="text" className="search-box" placeholder='Filter crypto name' onChange={(e)=>{setSearchCrypto(e.target.value)}}/>
             </div>
                 <Table bordered>
                     <thead>
@@ -23,7 +21,7 @@ const Top15 = (props) => {
                             <th>24h Change %</th>
                             <th>Market Cap</th>
                             <th>Circulating Supply</th>
-                            <th>Favorites</th>
+                            <th>Add Favorite</th>
                             <th>Detail</th>
                         </tr>
                     </thead>
@@ -36,13 +34,14 @@ const Top15 = (props) => {
                                 ){
                                     return val
                                 }
+                                return null
                             })
                         .map((crypto, index)=>{
                             return (
                                 <tr key={crypto.id}>
                                     <td>{index + 1}</td>
                                     <td>
-                                        <a className="crypto-links" href="#"><img className="token-icon" src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${crypto.id}.png`} />{ crypto.name }</a>
+                                        <a className="crypto-links" href="http://localhost:3000/home"><img alt="crypto icon" className="token-icon" src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${crypto.id}.png`} />{ crypto.name }</a>
                                     </td>
                                     <td>${ crypto.quote.USD.price.toLocaleString() }</td>
                                     <td>{ crypto.quote.USD.percent_change_24h.toLocaleString() }%</td>

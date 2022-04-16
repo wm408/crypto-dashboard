@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { BsSuitHeart, BsSuitHeartFill } from 'react-icons/bs';
+import React from 'react';
+import { BsSuitHeartFill } from 'react-icons/bs';
 import axios from 'axios';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
@@ -7,35 +7,29 @@ import 'tippy.js/dist/tippy.css';
 const AddFavorite = (props) => {
 
     const { favorites, setFavorites, symbol  } = props;
-    const [ errors, setErrors ] = useState('');
-    const [ loaded, setLoaded ] = useState(false);
+    // const [ errors, setErrors ] = useState('');
+    // const [ loaded, setLoaded ] = useState(false);
     const addToFavorites = async (e) => {
         e.preventDefault()
         try {
             const newFavorite = await axios.get(`http://localhost:8000/api/list/getone?symbol=${e.currentTarget.id}`, { withCredentials: true })
             console.log(newFavorite.data.data)
             console.log(newFavorite.data.data[e.target.id])
-            const postFavs = await axios.post('http://localhost:8000/api/favorites', 
+            await axios.post('http://localhost:8000/api/favorites', 
                 {
                     favorite:true,
                     symbol: e.target.id,
                     notes:'Leave your notes here',
                 }, { withCredentials: true });
 
-            console.log(newFavorite.data.data)
-            console.log(newFavorite.data.data[e.target.id][0])
+            // console.log(newFavorite.data.data)
+            // console.log(newFavorite.data.data[e.target.id][0])
 
             setFavorites([...favorites, newFavorite.data.data[e.target.id][0]]);
-            // console.log(e.currentTarget.id);
-            // console.log(newFavorite.data.data.symbol);
-            // console.log(newFavorite.data.`${e.currentTarget.id}`)
 
         } catch (err) {
-            // console.log(err);
-            // console.log("err.response:", err.response);
-            // console.log("err.response.data:", err.response.data);
             console.log(err.response.data.errors.symbol.message);
-            setErrors(err.response.data.errors.symbol);
+            // setErrors(err.response.data.errors.symbol);
         }
     }
 

@@ -1,7 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import { Table } from "react-bootstrap";
-import { BsSuitHeart, BsSuitHeartFill } from 'react-icons/bs';
-import DeleteFavorite from './DeleteFavorite';
 import DeleteButton from './DeleteButton';
 
 const Favorites = (props) => {
@@ -29,9 +27,9 @@ const Favorites = (props) => {
                         favorites.map((crypto, index)=>{ // ? if favorites, go ahead and map through
                             return (
                                 <tr key={crypto.symbol}>
-                                    <td>1</td>
+                                    <td>{index + 1}</td>
                                     <td>
-                                        <a className="crypto-links"><img className="token-icon" src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${crypto.id}.png`} />{ crypto.name }</a>
+                                        <a className="crypto-links" href="http://localhost:3000/home"><img alt="crypto icon" className="token-icon" src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${crypto.id}.png`} />{ crypto.name }</a>
                                     </td>
                                     <td>${ crypto.quote.USD.price.toLocaleString() }</td>
                                     <td>{ crypto.quote.USD.percent_change_24h.toLocaleString() }%</td>
