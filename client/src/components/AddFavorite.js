@@ -22,9 +22,6 @@ const AddFavorite = (props) => {
                     notes:'Leave your notes here',
                 }, { withCredentials: true });
 
-            // console.log(newFavorite.data.data)
-            // console.log(newFavorite.data.data[e.target.id][0])
-
             setFavorites([...favorites, newFavorite.data.data[e.target.id][0]]);
 
         } catch (err) {
