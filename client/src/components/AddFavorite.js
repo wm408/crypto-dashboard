@@ -33,15 +33,8 @@ const AddFavorite = (props) => {
         }
     }
 
-    /* 
-    Function to take the id (cmc id or symbol) value from the button, then,
-    copy the particular cmc crypto from the Top15 state to the Favorites
-    component and state, and then, also post to the favorites collection, 
-    the favorite crypto.
-    */
     return(
         <div className="add-fav-icon">
-            {/* Look up invisible inputs. Throw the input on top of the heart */}
             <Tippy content={'Add favorite'}>
                 <label htmlFor={`${symbol}`}>
                     <BsSuitHeartFill />
