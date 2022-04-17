@@ -3,8 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './views/Home'
 import Register from './components/Register';
 import Login from './components/Login';
-import EditFavorite from './components/FavoriteDetails';
-// import LogReg from './views/LogReg';
+import FavoriteDetails from './components/FavoriteDetails';
 
 function App() {
   return (
@@ -14,7 +13,7 @@ function App() {
           <Route element={<Login />} path='/' />
           <Route element={<Register />} path='/register' />
           <Route element={<Home />} path='/home' />
-          <Route element={<EditFavorite />} path='/user/favorites/:emailAddress' />
+          <Route element={<FavoriteDetails />} path='/favorites/:iconid/:symbol/' />
         </Routes>
       </div>
     </BrowserRouter>

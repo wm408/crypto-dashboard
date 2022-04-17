@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 
 const Header = (props) => {
 
+    const { pageHeading } = props;
+
     const navigate = useNavigate();
     const logout = (e) =>{
         e.preventDefault();
@@ -24,12 +26,13 @@ const Header = (props) => {
     };
 
     return(
-        <div>
-            <div>
-                <h1 className="margin-top">Crypto Dashboard</h1>
+        <div className="header-flex">
+            <div className="col-3rd"></div>
+            <div className="col-3rd">
+                <h1 className="margin-top">{pageHeading}</h1>
             </div>
-            <div className="">
-                <button className="btn btn-sm btn-outline-secondary" onClick={(e) => logout(e)}> Logout</button>
+            <div className="col-3rd">
+                <button className="btn btn-sm btn-outline-secondary btn-margin" onClick={(e) => logout(e)}> Logout</button>
             </div>
         </div>
         

@@ -7,8 +7,6 @@ import 'tippy.js/dist/tippy.css';
 const AddFavorite = (props) => {
 
     const { favorites, setFavorites, symbol  } = props;
-    // const [ errors, setErrors ] = useState('');
-    // const [ loaded, setLoaded ] = useState(false);
     const addToFavorites = async (e) => {
         e.preventDefault()
         try {

@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import axios from "axios";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 
 const Register = (props) => {
 
     const [confirmReg, setConfirmReg] = useState("");
     const [errors, setErrors] = useState({});
+    const navigate = useNavigate();
     
     const [user, setUser] = useState({ //using a single state object to hold all data!
         firstName: '',
@@ -48,6 +49,7 @@ const Register = (props) => {
                     "Thank you for Registering, you can now log in!",
                 );
                 setErrors({}); // remember to reset errors state if it was successful
+                navigate('/');
             })
             .catch((err) => {
                 console.log(err);

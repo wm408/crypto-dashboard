@@ -1,6 +1,7 @@
 import React from 'react';
 import { Table } from "react-bootstrap";
 import DeleteButton from './DeleteButton';
+import { Link } from 'react-router-dom';
 
 const Favorites = (props) => {
 
@@ -8,7 +9,7 @@ const Favorites = (props) => {
 
     return(
         <div className="margin-top">
-            <h2 id="top15-heading">Favorites</h2>
+            <h2 id="top50-heading">Favorites</h2>
                 <Table bordered>
                     <thead>
                         <tr>
@@ -35,8 +36,15 @@ const Favorites = (props) => {
                                     <td>{ crypto.quote.USD.percent_change_24h.toLocaleString() }%</td>
                                     <td>${ crypto.quote.USD.market_cap.toLocaleString() }</td>
                                     <td>{ crypto.circulating_supply.toLocaleString() }</td>
-                                    <td><DeleteButton deleteCallBack={()=>removeFromDom(crypto.symbol)}/></td>
-                                    <td>DetailBtn</td>
+                                    <td>
+                                        <div className="fav-svg">
+                                            <DeleteButton deleteCallBack={()=>removeFromDom(crypto.symbol)}/>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <Link to={`/favorites/${crypto.id}/${crypto.symbol}`}>See Detail</Link>
+                                        {/* <Link to={`/api/products/${product._id}`}>{product.title}</Link> */}
+                                    </td>
                                 </tr>
                             )})
                         }

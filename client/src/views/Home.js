@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Top15 from '../components/Top15';
+import Top50 from '../components/Top50';
 import Favorites from '../components/Favorites';
 import Header from '../components/Header';
 
 const Home = () => {
 
-    const [ listTop15, setListTop15 ] = useState([]);
+    const [ listTop50, setListTop50 ] = useState([]);
     const [ favorites, setFavorites ] = useState([]);
     const [ searchCrypto, setSearchCrypto ] = useState('')
     const [ num, setNum ] = useState(0);
+    // const [ favoriteId, setFavoriteId ] = useState('');
 
     useEffect(()=>{
         const Lists = async () => {
@@ -18,9 +19,10 @@ const Home = () => {
                 const list = await axios.get(`http://localhost:8000/api/list/`, { withCredentials: true });  // GET need to put a limit of 50 here.
                 const userFavs = await axios.get(`http://localhost:8000/api/favoritesbyuser/${loggedInUser.data.emailAddress}`, { withCredentials: true }); //GET need to build this API which looks to the database and builds this list upon a registered user's favorites.
                 // setUserEmail(loggedInUser.data.emailAddress);
-                setListTop15(list.data);
+                setListTop50(list.data);
 
                 const findSymbol = (targetSymbol) => list.data.filter(crypto => crypto.symbol === targetSymbol);
+                const findFavoriteInState = (targetFavorite) => userFavs.data.filter(crypto => crypto.symbol === targetFavorite);
 
                 let arrHolder = [];
                 for (let i = 0; i < list.data.length; i++) {
@@ -28,6 +30,7 @@ const Home = () => {
                     arrHolder.push(findSymbol(userFavs.data[i].symbol)[0]);
                     setFavorites(arrHolder);
                 }
+                console.log(findFavoriteInState(userFavs.data.symbol));
             } catch (error) {
                 console.log(error);
             }
@@ -35,11 +38,10 @@ const Home = () => {
         Lists();
     },[num]); // '[]' means to just run the useEffect once, 'num' is incremented to trigger re-render.
 
-    const removeFromDom = (favorite) => {
-        axios.delete(`http://localhost:8000/api/favorites/${favorite}`, { withCredentials: true })
+    const removeFromDom = (favoriteSymbol) => {
+        axios.delete(`http://localhost:8000/api/favorites/${favoriteSymbol}`, { withCredentials: true })
             .then((res)=>{
-                console.log(res.data)
-                setFavorites(favorites.filter((favz, index)=>favz._id !== favorite))
+                setFavorites(favorites.filter((favz, index)=>favz._id !== favoriteSymbol))
                 setNum(num+1);
             })
             .catch((err)=>console.log(err))
@@ -49,15 +51,17 @@ const Home = () => {
         <div>
             <Header 
                 setSearchCrypto={setSearchCrypto}
+                pageHeading={'Crypto Dashboard'}
+                listTop50={listTop50}
             />
             <Favorites 
-                listTop15={listTop15}
+                listTop50={listTop50}
                 favorites={favorites}
                 setFavorites={setFavorites}
                 removeFromDom={removeFromDom}
             />
-            <Top15 
-                listTop15={listTop15}
+            <Top50 
+                listTop50={listTop50}
                 favorites={favorites}
                 setFavorites={setFavorites}
                 searchCrypto={searchCrypto}

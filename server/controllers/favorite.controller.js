@@ -49,7 +49,8 @@ const addNewFavorite = (req, res) => { //Like create new, we establish a new fav
 const findOneFavorite = (req, res) => {
     //We use the paramater's (params) or the client's request to search for a
     //specific document by the field (here _id) specified
-    Favorites.findOne({ _id: req.params.id })//the params id MUST MATCH how we write it in our routes!!!
+    // Favorites.findOne({ _id: req.params.id })//the params id MUST MATCH how we write it in our routes!!!
+    Favorites.findOne({ symbol: req.params.symbol })//the params id MUST MATCH how we write it in our routes!!!
         .then((oneFavorite)=>{
             console.log(oneFavorite);
             res.json(oneFavorite);
@@ -75,7 +76,7 @@ const deleteOneFavorite = (req, res) => {
 
 const updateFavorite = (req, res) => {
 //This Mongoose query requires both a parameter AND body from the request!
-    Favorites.findOneAndUpdate({_id: req.params.id},
+    Favorites.findOneAndUpdate({symbol: req.params.symbol},
     req.body,
     //These options return a new doc and allow schema valids to run on PUT req
     {new: true, runValidators: true}

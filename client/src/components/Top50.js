@@ -2,14 +2,14 @@ import React from 'react';
 import AddFavorite from './AddFavorite';
 import { Table } from "react-bootstrap";
 
-const Top15 = (props) => {
+const Top50 = (props) => {
     
-    const { listTop15, favorites, setFavorites, searchCrypto, setSearchCrypto } = props;
+    const { listTop50, favorites, setFavorites, searchCrypto, setSearchCrypto } = props;
 
     return(
         <div className="margin-top">
             <div className="top-crypto-list">
-                <h2 id="top15-heading">Top 15 By Market Cap</h2>
+                <h2 id="top50-heading">Top 50 By Market Cap</h2>
                 <input type="text" className="search-box" placeholder='Filter crypto name' onChange={(e)=>{setSearchCrypto(e.target.value)}}/>
             </div>
                 <Table bordered>
@@ -27,7 +27,7 @@ const Top15 = (props) => {
                     </thead>
                     <tbody id="middle">
                         {
-                            listTop15.filter((val)=>{
+                            listTop50.filter((val)=>{
                                 if(searchCrypto === ''){
                                     return val
                                 } else if (val.name.toLowerCase().includes(searchCrypto.toLowerCase()) || val.symbol.toLowerCase().includes(searchCrypto.toLowerCase())
@@ -64,4 +64,4 @@ const Top15 = (props) => {
     )
 }
 
-export default Top15;
+export default Top50;
