@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from "react-router-dom"
 import Header from './Header';
 import DeleteButton from './DeleteButton';
+import Iframe from 'react-iframe'
 
 const FavoriteDetails = (props) =>{
 
@@ -44,7 +45,6 @@ const FavoriteDetails = (props) =>{
             notes,
         })
             .then((res)=>{
-                // console.log(res.data);
                 setNoteUpdateMessage("Notes saved...");
             })
             .catch(err => console.log(err))
@@ -74,7 +74,14 @@ const FavoriteDetails = (props) =>{
                 <div className="details-container">
                     <div>
                         <h3>90 Day ROI Look</h3>
-                        {/* <div id="mychart"></div> */}
+                        <Iframe url="http://localhost:8000/chart"
+                            width="800px"
+                            height="500px"
+                            id="myId"
+                            className="myClassname"
+                            display="initial"
+                            position="relative"
+                        />
                     </div>
                     <div>
                         <form onSubmit={updateNote}>

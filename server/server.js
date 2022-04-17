@@ -4,6 +4,8 @@ const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const app = express();
+const fs = require('fs')
+const path = require('path')
 
 //This parses incoming requests with JSON payloads.
 //Allows us to recongnize Request Object as a JSON Object.
@@ -21,6 +23,15 @@ app.use(cors({
 }))
 
 app.use(cookieParser())
+
+app.use(express.static(path.join(__dirname, 'public')))
+
+app.get('/chart', function(req, res){
+    res.render('index')
+})
+
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'ejs')
 
 require("./config/mongoose.config")
 

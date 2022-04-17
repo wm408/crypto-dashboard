@@ -220,3 +220,7 @@ button {
 .fav-svg:hover {
   fill: #212529!important;
 }
+
+#mychart {
+  display: block
+}
