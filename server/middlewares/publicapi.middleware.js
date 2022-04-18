@@ -8,7 +8,7 @@ module.exports = (app)=>{
                 method: 'get',
                 // baseURL: 'https://api.coincap.io/v2/assets', //coincap
                 // baseURL: 'https://api.cryptowat.ch/markets/kraken/btcusd/price', //cryptowat.ch
-                baseURL: 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?limit=4',
+                baseURL: 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?limit=50',
                 // baseURL: `https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=${symbol}`,
                 // url: '',
                 headers: {

@@ -22,7 +22,7 @@ const Top50 = (props) => {
                             <th>Market Cap</th>
                             <th>Circulating Supply</th>
                             <th>Add Favorite</th>
-                            <th>Detail</th>
+                            {/* <th>Detail</th> */}
                         </tr>
                     </thead>
                     <tbody id="middle">
@@ -54,7 +54,7 @@ const Top50 = (props) => {
                                             setFavorites={setFavorites}
                                         />
                                     </td>
-                                    <td>DetailBtn</td>
+                                    {/* <td></td> */}
                                 </tr>
                             )})
                         }
